@@ -1,6 +1,5 @@
 import os
 import xmltodict
-import csv
 from collections import OrderedDict
 import json
 
@@ -37,5 +36,5 @@ for file in os.listdir('./LS-SSDD-v1.0-OPEN/Annotations_sub'):
                     all_ships[-1]['ship_count'] += 1
 
 
-with open('input.json', 'w') as outfile:
+with open('output.json', 'w') as outfile:
     json.dump(all_ships, outfile)

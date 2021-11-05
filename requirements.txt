@@ -1,0 +1,7 @@
+xmltodict
+json
+cv2
+numpy
+matplotlib
+pandas
+tensoflow
