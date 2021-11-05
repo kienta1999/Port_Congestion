@@ -2,6 +2,7 @@ import os
 import xmltodict
 import csv
 from collections import OrderedDict
+import json
 
 
 def getImageXml(img_tag):
@@ -9,6 +10,8 @@ def getImageXml(img_tag):
 
 
 all_ships = []
+number_of_rows = 20
+number_of_cols = 20
 for file in os.listdir('./LS-SSDD-v1.0-OPEN/Annotations_sub'):
     img_tag = file.split('.')[0]
     xml_path = getImageXml(img_tag)
@@ -16,6 +19,7 @@ for file in os.listdir('./LS-SSDD-v1.0-OPEN/Annotations_sub'):
         data_dict = xmltodict.parse(xml_file.read())['annotation']
         img_width = int(data_dict['size']['width'])
         img_height = int(data_dict['size']['height'])
+        all_ships.append({'img_tag': img_tag, 'ships': [], 'ship_count': 0})
         if 'object' in data_dict:
             objects = data_dict['object']
             for ship in objects:
@@ -28,10 +32,10 @@ for file in os.listdir('./LS-SSDD-v1.0-OPEN/Annotations_sub'):
                     y_center = (y_min + y_max) / 2
                     width = x_max - x_min
                     height = y_max - y_min
-                    all_ships.append(
-                        {'img_tag': img_tag, 'x_center': x_center, 'y_center': y_center, 'width': width, 'height': height})
-with open('ship_position.csv', 'w') as f:  # You will need 'wb' mode in Python 2.x
-    w = csv.DictWriter(f, all_ships[0].keys())
-    w.writeheader()
-    for ship in all_ships:
-        w.writerow(ship)
+                    all_ships[-1]['ships'].append(
+                        {'x_center': x_center, 'y_center': y_center, 'width': width, 'height': height})
+                    all_ships[-1]['ship_count'] += 1
+
+
+with open('input.json', 'w') as outfile:
+    json.dump(all_ships, outfile)
