@@ -4,10 +4,6 @@ import csv
 from collections import OrderedDict
 
 
-def getImagePath(img_tag):
-    return f'./LS-SSDD-v1.0-OPEN/JPEGImages_sub/{img_tag}.jpg'
-
-
 def getImageXml(img_tag):
     return f'./LS-SSDD-v1.0-OPEN/Annotations_sub/{img_tag}.xml'
 
