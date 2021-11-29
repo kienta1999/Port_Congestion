@@ -63,9 +63,9 @@ model.compile(loss=losses.MeanSquaredError(
 ), optimizer=optimizers.Adam(learning_rate=0.001), metrics=['accuracy'])
 
 model_history = model.fit(X_train, y_train, batch_size=10,
-          epochs=1, validation_split = 0.1)
+          epochs=30, validation_split = 0.1)
 
-model.save('CNN_1_epochs.h5')
+model.save('CNN.h5')
 # summarize history for accuracy
 plt.plot(model_history.history['accuracy'])
 plt.plot(model_history.history['loss'])
@@ -74,6 +74,7 @@ plt.ylabel('accuracy')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
 plt.savefig('model_accuracy.png')
+plt.clf()
 
 plt.plot(model_history.history['val_accuracy'])
 plt.plot(model_history.history['val_loss'])
@@ -82,6 +83,7 @@ plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
 plt.savefig('model_loss.png')
+plt.clf()
 
 print('--------------------------------------------------------')
 print('evaluate on test set')
