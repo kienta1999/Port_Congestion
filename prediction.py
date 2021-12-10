@@ -1,9 +1,9 @@
 import tensorflow as tf
 from tensorflow.keras import *
 import numpy as np
-from model_creation import model
+from sklearn.model_selection import train_test_split
 
-model.load_weights('./CNN.h5')
+model = models.load_model('./CNN.h5')
 
 with open('ship_data.npy', 'rb') as f:
     X = np.load(f)
