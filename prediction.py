@@ -1,5 +1,3 @@
-import tensorflow as tf
-from tensorflow.keras import *
 import numpy as np
 import cv2
 
@@ -16,7 +14,7 @@ while True:
         image = cv2.resize(image, (height, width))
         grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         grayscale = np.array(grayscale).reshape(1, height, width, 1)
-        print('There are', model.predict(grayscale)[0][0], 'ships in this image.')
+        print('There are', round(model.predict(grayscale)[0][0]), 'ships in this image.')
     except:
         print("Invalid path")
         continue
