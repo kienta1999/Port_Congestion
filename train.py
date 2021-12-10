@@ -15,7 +15,7 @@ y_minority = y[y != 0]
 
 X_majority = X[y == 0]
 y_majority = y[y == 0]
-X_majority_resample, y_majority_resample = resample(X_majority, y_majority, random_state=0, n_samples=(y_minority.shape[0] // 4))
+X_majority_resample, y_majority_resample = resample(X_majority, y_majority, n_samples=(y_minority.shape[0] // 2))
 
 X = np.concatenate((X_minority, X_majority_resample), axis=0)
 y = np.concatenate((y_minority, y_majority_resample), axis=0)
@@ -24,7 +24,7 @@ data_size, height, width = X.shape
 X = X.reshape(data_size, height, width, 1)
 y = y.reshape(-1, 1)
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
+    X, y, test_size=0.2)
 
 print(model.summary())
 
@@ -32,9 +32,9 @@ model.compile(loss=losses.MeanSquaredError(
 ), optimizer=optimizers.Adam(learning_rate=0.000001), metrics=['accuracy'])
 
 model_history = model.fit(X_train, y_train, batch_size=10,
-          epochs=30, validation_split = 0.1)
+          epochs=30)
 
-model.save('much_less_0_CNN.h5')
+model.save('leaky_CNN.h5')
 # # summarize history for accuracy
 # plt.plot(model_history.history['accuracy'])
 # plt.plot(model_history.history['loss'])
