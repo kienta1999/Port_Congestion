@@ -15,13 +15,10 @@ y_minority = y[y != 0]
 
 X_majority = X[y == 0]
 y_majority = y[y == 0]
-X_majority_resample, y_majority_resample = resample(X_majority, y_majority, random_state=0, n_samples=(y_minority.shape[0] // 2))
+X_majority_resample, y_majority_resample = resample(X_majority, y_majority, random_state=0, n_samples=(y_minority.shape[0]))
 
 X = np.concatenate((X_minority, X_majority_resample), axis=0)
 y = np.concatenate((y_minority, y_majority_resample), axis=0)
-
-from collections import Counter
-print(Counter(y))
 
 data_size, height, width = X.shape
 X = X.reshape(data_size, height, width, 1)
@@ -37,7 +34,7 @@ model.compile(loss=losses.MeanSquaredError(
 model_history = model.fit(X_train, y_train, batch_size=10,
           epochs=30, validation_split = 0.1)
 
-model.save('CNN.h5')
+model.save('balanced_CNN.h5')
 # # summarize history for accuracy
 # plt.plot(model_history.history['accuracy'])
 # plt.plot(model_history.history['loss'])
