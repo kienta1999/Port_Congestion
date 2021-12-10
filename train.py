@@ -29,12 +29,12 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(model.summary())
 
 model.compile(loss=losses.MeanSquaredError(
-), optimizer=optimizers.Adam(learning_rate=0.001), metrics=['accuracy'])
+), optimizer=optimizers.Adam(learning_rate=0.000001), metrics=['accuracy'])
 
 model_history = model.fit(X_train, y_train, batch_size=10,
           epochs=30, validation_split = 0.1)
 
-model.save('balanced_CNN.h5')
+model.save('balanced_sigmoid_CNN.h5')
 # # summarize history for accuracy
 # plt.plot(model_history.history['accuracy'])
 # plt.plot(model_history.history['loss'])
