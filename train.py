@@ -4,10 +4,25 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras import *
 import matplotlib.pyplot as plt
 from model_creation import model
+from sklearn.utils import resample
 
 with open('ship_data.npy', 'rb') as f:
     X = np.load(f)
     y = np.load(f)
+
+X_minority = X[y != 0]
+y_minority = y[y != 0]
+
+X_majority = X[y == 0]
+y_majority = y[y == 0]
+X_majority_resample, y_majority_resample = resample(X_majority, y_majority, random_state=0, n_samples=(y_minority.shape[0] // 2))
+
+X = np.concatenate((X_minority, X_majority_resample), axis=0)
+y = np.concatenate((y_minority, y_majority_resample), axis=0)
+
+from collections import Counter
+print(Counter(y))
+
 data_size, height, width = X.shape
 X = X.reshape(data_size, height, width, 1)
 y = y.reshape(-1, 1)
