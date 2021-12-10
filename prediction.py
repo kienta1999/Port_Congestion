@@ -1,7 +1,9 @@
 import numpy as np
 import cv2
+import tensorflow as tf
+from tensorflow.keras import *
 
-model = models.load_model('./CNN.h5')
+model = models.load_model('./balanced_low_learning_rate_CNN.h5')
 width = height = 800
 
 while True:
