@@ -1,22 +1,22 @@
 import tensorflow as tf
 from tensorflow.keras import *
 import numpy as np
-from sklearn.model_selection import train_test_split
+import cv2
 
 model = models.load_model('./CNN.h5')
+width = height = 800
 
-with open('ship_data.npy', 'rb') as f:
-    X = np.load(f)
-    y = np.load(f)
-data_size, height, width = X.shape
-X = X.reshape(data_size, height, width, 1)
-y = y.reshape(-1, 1)
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
-
-
-print('--------------------------------------------------------')
-print('evaluate on test set')
-loss, acc = model.evaluate(X_test, y_test, verbose=2)
-print("Model accuracy on test: {:5.2f}%".format(100 * acc))
-print("Model loss on test", loss)
+while True:
+    print("Enter the path of the image, or quit to end: ")
+    path = input()
+    if path == 'quit':
+        break
+    try:
+        image = cv2.imread(path)
+        image = cv2.resize(image, (height, width))
+        grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        grayscale = np.array(grayscale).reshape(1, height, width, 1)
+        print('There are', model.predict(grayscale)[0][0], 'ships in this image.')
+    except:
+        print("Invalid path")
+        continue
