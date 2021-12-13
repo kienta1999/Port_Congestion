@@ -2,9 +2,9 @@ import numpy as np
 import cv2
 import tensorflow as tf
 from tensorflow.keras import *
-from train import model
+# from train import model
 
-# model = models.load_model('./leaky_CNN.h5')
+model = models.load_model('./leaky_CNN.h5')
 width = height = 800
 
 while True:

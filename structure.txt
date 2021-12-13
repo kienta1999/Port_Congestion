@@ -1,0 +1,23 @@
+.
+  |-data_preprocessing1.py
+  |-data_preprocessing2.py
+  |-leaky_CNN.h5
+  |-LS-SSDD-v1.0-OPEN
+  |  |-Annotations
+  |  |-Annotations_sub
+  |  |-ImageSets
+  |  |-JPEGImages
+  |  |-JPEGImages_sub
+  |  |-JPEGImages_VH
+  |  |-Tools
+  |-model_creation.py
+  |-output.json
+  |-prediction.py
+  |-README.md
+  |-requirements.txt
+  |-script.sh
+  |-ship_data.npy
+  |-structure.txt
+  |-train.py
+  |-training_result.png
+  |-vis.py
