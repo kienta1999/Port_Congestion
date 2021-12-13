@@ -1,4 +1,5 @@
 # port_congestion
+
 <h1>How to run the code</h1>
 
 <h2>Step 1: download data</h2>
@@ -13,7 +14,6 @@ Download it and put it in the root folder
 
 <h2>Step 3: data preprocessing</h2>
 <p>Run <i>data_preprocessing1.py</i> to convert the xml to json</p>
-<p>Run <i>data_preprocessing1.py</i> to convert the xml</p>
 <p>
   Run <i>data_preprocessing2.py</i> to convert images and json data to npy
   format
